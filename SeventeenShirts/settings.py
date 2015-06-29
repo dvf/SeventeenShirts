@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'untitled.urls'
+ROOT_URLCONF = 'SeventeenShirts.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'untitled.wsgi.application'
+WSGI_APPLICATION = 'SeventeenShirts.wsgi.application'
 
 
 # Database
