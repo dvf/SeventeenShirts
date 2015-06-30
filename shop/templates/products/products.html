@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+    <h1>Products</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4" style="background:red;">
+                <img src="http://placehold.it/400x350" style="width: 100%">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <strong>{{ product.current_price }}</strong>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
