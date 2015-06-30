@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     url(r'', views.index),
-    url(r'^products/(?P<id>)/$', views.products)
+    # url(r'^products/(?P<id>)/$', views.products)
 ]

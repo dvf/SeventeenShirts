@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Seventeen Shirts</title>
+</head>
+<body>
+<h1>Products</h1>
+{% for product in products %}
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <strong>{{ product.current_price }}</strong>
+    </div>
+{% endfor %}
+
+</body>
+</html>
