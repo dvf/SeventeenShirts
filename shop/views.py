@@ -8,7 +8,7 @@ def index(request):
     products = Product.objects.all()
 
     # Let's paginate
-    paginator = Paginator(products, 9)
+    paginator = Paginator(products, 10)
     page = request.GET.get('page')
 
     try:
@@ -25,4 +25,17 @@ def index(request):
         'navbar': "products"
     }
 
-    return render(request, 'products/products.html', context_dict)
+    return render(request, 'products/product_index.html', context_dict)
+
+
+def detail(request, product_id):
+    product = Product.objects.get(pk=product_id)
+
+    context_dict = {
+        'page_title': "Viewing Product" + product_id,
+        'page_sub_title': "",
+        'product': product,
+        'navbar': "products"
+    }
+
+    return render(request, 'products/product_detail.html', context_dict)

@@ -1,9 +1,8 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 
-from . import views
-
+from shop import views
 
 urlpatterns = [
-    url(r'', views.index),
-    # url(r'^products/(?P<id>)/$', views.products)
+    url(r'^$', views.index, name='index'),
+    url(r'^products/(?P<product_id>[0-9]+)/$', views.detail, name='detail')
 ]

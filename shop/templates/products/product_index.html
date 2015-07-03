@@ -2,12 +2,13 @@
 
 {% block content %}
 
-    <h1>Products</h1>
+
     <div class="row">
+        <h1>Products</h1>
         {% for product in products %}
-            <div class="col-md-4" style="background:red;">
+            <div class="col-md-4">
                 <img src="http://placehold.it/400x350" style="width: 100%">
-                <h2>{{ product.name }}</h2>
+                <h2><a href="{%  url 'detail' product.id %}">{{ product.name }}</a></h2>
                 <p>{{ product.description }}</p>
                 <strong>{{ product.current_price }}</strong>
             </div>

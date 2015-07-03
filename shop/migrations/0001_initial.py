@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
             name='Customer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('age', models.IntegerField()),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -54,7 +55,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='product',
+            model_name='order',
             name='product_order',
             field=models.ManyToManyField(to='shop.Order', through='shop.ProductOrder'),
         ),
