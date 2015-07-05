@@ -9,13 +9,15 @@
 
     <link rel="stylesheet" href="{%  static 'css/base.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
     <title></title>
 </head>
 <body>
 
 
     {# navbar #}
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -47,7 +49,8 @@
                             <li>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                        <form class="form" role="form" method="post" action="{% url 'accounts:login' %}" accept-charset="UTF-8" id="login-nav">
+                                            {% csrf_token %}
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
                                                 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required="">
@@ -63,7 +66,7 @@
                                             </div>
                                             <button type="submit" class="btn btn-success btn-block">Login</button>
                                             <li class="divider"></li>
-                                            Don't have a login? <a href="{%  url 'register:register' %}">Register now.</a>
+                                            Don't have a login? <a href="{%  url 'accounts:register' %}">Register now.</a>
                                         </form>
                                     </div>
                                 </div>
@@ -90,7 +93,10 @@
         {# messages #}
             {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
                     {% endfor %}
                 </ul>
             {% endif %}

@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 from .forms import UserForm
@@ -28,3 +29,19 @@ def register(request):
         user_form = UserForm()
 
     return render(request, 'accounts/register.html', dict(user_form=user_form))
+
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(username=email, password=password)
+
+        if user:
+            messages.success(request, "Welcome {0}!".format(user.first_name))
+        else:
+            messages.error(request, "Invalid login credentials.")
+            return redirect('shop:index')
+    else:
+        return redirect('shop:index')
