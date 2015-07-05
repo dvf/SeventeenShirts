@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Seventeen Shirts</a>
+                <a class="navbar-brand" href="{% url 'shop:index' %}">Seventeen Shirts</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -35,16 +35,18 @@
                     <li><a href="#contact">Sunglasses</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Daniel van Flymen <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Purchase History</a></li>
-                            <li><a href="#">Account Settings</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Sign Out</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="menuLogin"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login / Register <span class="caret"></span></a>
+                    {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Daniel van Flymen <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Purchase History</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Sign Out</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="dropdown" id="menuLogin"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login / Register <span class="caret"></span></a>
                         <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
                             <li>
                                 <div class="row">
@@ -52,12 +54,12 @@
                                         <form class="form" role="form" method="post" action="{% url 'accounts:login' %}" accept-charset="UTF-8" id="login-nav">
                                             {% csrf_token %}
                                             <div class="form-group">
-                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required="">
+                                                <label class="sr-only" for="email">Email address</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required="">
                                             </div>
                                             <div class="form-group">
-                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required="">
+                                                <label class="sr-only" for="password">Password</label>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="">
                                             </div>
                                             <div class="checkbox">
                                                 <label>
@@ -72,9 +74,8 @@
                                 </div>
                             </li>
                         </ul>
-
-
                     </li>
+                    {% endif %}
                 </ul>
 
 

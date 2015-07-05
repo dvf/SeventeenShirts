@@ -17,9 +17,9 @@
 
                 {% for field in user_form.visible_fields %}
                     <div class="form-group">
-                        {{ field.errors }}
                         {{ field.label_tag }}
                         {{ field|add_css:"form-control" }}
+                        {{ field.errors }}
                     </div>
 
                 {% endfor %}

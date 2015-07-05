@@ -1,15 +1,16 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
-from .forms import UserForm
+from .forms import UserRegistrationForm
 
 
 def register(request):
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
+        user_form = UserRegistrationForm(data=request.POST)
 
         if user_form.is_valid():
             # Create a new user object
@@ -26,22 +27,34 @@ def register(request):
 
             return redirect('shop:index')
     else:
-        user_form = UserForm()
+        user_form = UserRegistrationForm()
 
     return render(request, 'accounts/register.html', dict(user_form=user_form))
 
 
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
 
+        # If remember me hasn't been checked then expire the session
+        if not request.POST.get('remember_me'):
+            request.session.set_expiry(0)
+
         user = authenticate(username=email, password=password)
 
         if user:
+            login(request, user)
             messages.success(request, "Welcome {0}!".format(user.first_name))
         else:
             messages.error(request, "Invalid login credentials.")
-            return redirect('shop:index')
+        return redirect('shop:index')
     else:
         return redirect('shop:index')
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    messages.warning(request, "You've been logged out.")
+    return redirect('shop:index')
