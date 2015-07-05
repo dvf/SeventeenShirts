@@ -63,7 +63,7 @@
                                             </div>
                                             <button type="submit" class="btn btn-success btn-block">Login</button>
                                             <li class="divider"></li>
-                                            Don't have a login? <a href="#">Register now.</a>
+                                            Don't have a login? <a href="{%  url 'register:register' %}">Register now.</a>
                                         </form>
                                     </div>
                                 </div>
@@ -85,13 +85,24 @@
     {% endblock %}
     {# /breadcrumbs #}
 
-    {# content #}
+
     <div class="container">
-        {% block content %}
-            <strong>Oops!</strong> Looks like there's nothing to see here.
-        {% endblock %}
+        {# messages #}
+            {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {# /messages #}
+
+        {# content #}
+            {% block content %}
+                <strong>Oops!</strong> Looks like there's nothing to see here.
+            {% endblock %}
+        {# /content #}
     </div>
-    {# /content #}
+
 
 
 

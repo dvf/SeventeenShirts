@@ -5,5 +5,4 @@ from shop.models import *
 admin.site.register(Order)
 admin.site.register(Product)
 admin.site.register(ProductOrder)
-admin.site.register(Customer)
 admin.site.register(Category)

@@ -6,7 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
 
     class Meta:
-        verbose_name_plural = "Catories"
+        verbose_name_plural = "Categories"
 
     def __unicode__(self):
         return self.name
@@ -23,13 +23,8 @@ class Product(models.Model):
         return self.name
 
 
-class Customer(models.Model):
-    user = models.OneToOneField(User)
-    age = models.IntegerField()
-
-
 class Order(models.Model):
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(User)
     product_order = models.ManyToManyField('Order', through='ProductOrder')
 
     def __unicode__(self):
@@ -37,13 +32,17 @@ class Order(models.Model):
 
 
 class ProductOrder(models.Model):
+    SIZES = (
+        (u'S', u'Small'),
+        (u'M', u'Medium'),
+        (u'L', u'Large'),
+        (u'XL', u'X-Large'),
+    )
+
     product = models.ForeignKey(Product)
-    quantity = models.IntegerField(default=1)
+    size = models.CharField(max_length=2, choices=SIZES)
 
     order = models.ForeignKey(Order)
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
     create_date = models.DateTimeField(auto_now_add=True)
-
-
-
