@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -32,6 +33,11 @@ def index(request):
 
 def detail(request, product_id):
     if request.method == 'POST':
+        # Check if user is logged in before processing POST
+        if not request.user.is_authenticated():
+            messages.error(request, "Only logged in users may purchase products.")
+            return redirect('shop:detail', product_id)
+
         form = BuyShirtForm(request.POST)
 
         if form.is_valid():

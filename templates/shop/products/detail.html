@@ -1,4 +1,5 @@
 {% extends "_shared/base.html" %}
+{% load add_css %}
 
 {% block content %}
 
@@ -13,8 +14,24 @@
             <p>{{ product.description }}</p>
             <form action="" method="post">
                 {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="Buy Shirts Now" />
+
+                {% for hidden_field in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field|add_css:"form-control" }}
+                                {{ field.errors.as_text }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <input type="submit" class="btn btn-success" value="Buy Shirts Now" />
             </form>
         </div>
     </div>
