@@ -38,10 +38,12 @@ def detail(request, product_id):
             messages.error(request, "Only logged in users may purchase products.")
             return redirect('shop:detail', product_id)
 
+        # Bind the submitted form
         form = BuyShirtForm(request.POST)
 
         if form.is_valid():
-            # Create a new purchase order
+            # Create a purchase order for the product
+
 
             messages.success(request, "Thank you! Your product has been purchased.")
             return redirect('shop:index')

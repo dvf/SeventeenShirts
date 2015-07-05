@@ -17,18 +17,9 @@ class Product(models.Model):
     description = models.TextField()
     current_price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category)
-    stock = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
-
-
-class Order(models.Model):
-    customer = models.ForeignKey(User)
-    product_order = models.ManyToManyField('Order', through='ProductOrder')
-
-    def __unicode__(self):
-        return self.pk
 
 
 class ProductOrder(models.Model):
@@ -39,10 +30,10 @@ class ProductOrder(models.Model):
         (u'XL', u'X-Large'),
     )
 
+    customer = models.ForeignKey(User)
     product = models.ForeignKey(Product)
-    size = models.CharField(max_length=2, choices=SIZES)
 
-    order = models.ForeignKey(Order)
+    size = models.CharField(max_length=2, choices=SIZES)
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
     create_date = models.DateTimeField(auto_now_add=True)
