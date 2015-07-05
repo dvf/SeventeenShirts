@@ -45,7 +45,7 @@ def user_login(request):
 
         if user:
             login(request, user)
-            messages.success(request, "Welcome {0}!".format(user.first_name))
+            messages.success(request, "Welcome, {0}!".format(user.first_name))
         else:
             messages.error(request, "Invalid login credentials.")
         return redirect('shop:index')
