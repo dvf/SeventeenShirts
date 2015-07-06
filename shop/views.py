@@ -1,9 +1,8 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from . models import Product
+from . models import Product, Order
 from . forms import BuyShirtForm
 
 
@@ -42,10 +41,24 @@ def detail(request, product_id):
         form = BuyShirtForm(request.POST)
 
         if form.is_valid():
+            # Fetch the Product
+            product = get_object_or_404(Product, pk=product_id)
+
             # Create a purchase order for the product
+            new_order = Order(
+                customer=request.user,
+                product=product,
+                size=form.cleaned_data.get('size'),
+                price=product.current_price
+            )
 
+            # Save it
+            new_order.save()
 
-            messages.success(request, "Thank you! Your product has been purchased.")
+            messages.success(
+                request,
+                "Thanks for shopping with us {0}! Your product has been purchased.".format(request.user.first_name)
+            )
             return redirect('shop:index')
     else:
         form = BuyShirtForm()

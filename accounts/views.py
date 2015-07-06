@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -6,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 from .forms import UserRegistrationForm
+from shop.models import Order
 
 
 def register(request):
@@ -58,3 +60,27 @@ def user_logout(request):
     logout(request)
     messages.warning(request, "You've been logged out.")
     return redirect('shop:index')
+
+
+@login_required
+def user_history(request):
+    orders = Order.objects.all()
+
+    # Let's paginate
+    paginator = Paginator(orders, 10)
+    page = request.GET.get('page')
+
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    context_dict = {
+        'page_title': "Order History",
+        'orders': orders,
+        'navbar': "my_account"
+    }
+
+    return render(request, 'accounts/history.html', context_dict)

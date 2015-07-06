@@ -2,27 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=200)
-
-    class Meta:
-        verbose_name_plural = "Categories"
-
-    def __unicode__(self):
-        return self.name
-
-
 class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     current_price = models.DecimalField(max_digits=8, decimal_places=2)
-    category = models.ForeignKey(Category)
 
     def __unicode__(self):
         return self.name
 
 
-class ProductOrder(models.Model):
+class Order(models.Model):
     SIZES = (
         (u'S', u'Small'),
         (u'M', u'Medium'),
@@ -37,3 +26,6 @@ class ProductOrder(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
     create_date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.customer.username)
