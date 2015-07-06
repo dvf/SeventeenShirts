@@ -6,8 +6,8 @@ class UserRegistrationForm(forms.Form):
     email = forms.EmailField()
     first_name = forms.CharField(max_length=200)
     last_name = forms.CharField(max_length=200)
-    password1 = forms.CharField(widget=forms.PasswordInput(), max_length=200)
-    password2 = forms.CharField(widget=forms.PasswordInput(), max_length=200)
+    password1 = forms.CharField(widget=forms.PasswordInput(), max_length=200, label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput(), max_length=200, label="Confirm your Password")
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

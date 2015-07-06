@@ -38,7 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# We will host the images on a CDN for speed
+# We will host the images on a CDN
 IMG_CDN = '/static/images/shirts'
 
 # Application definition
@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'shop',
     'accounts'
 )
@@ -87,10 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SeventeenShirts.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+# Change for PostgreSQL on Deploy
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
