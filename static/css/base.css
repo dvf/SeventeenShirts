@@ -33,3 +33,19 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+img.detail {
+    width: 100%;
+}
+
+.index-product {
+    margin-bottom: 30px;
+}
+
+.index-product a:hover {
+    text-decoration: none;
+}
+
+.index-product-price {
+    opacity: 0.5;
+}

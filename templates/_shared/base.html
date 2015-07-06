@@ -37,10 +37,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Daniel van Flymen <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.first_name }} {{ user.last_name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Purchase History</a></li>
-                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="{% url 'accounts:history' %}">Order History</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{% url 'accounts:logout' %}">Sign Out</a></li>
                             </ul>
@@ -92,31 +91,29 @@
 
     <div class="container">
         {# messages #}
-            {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {# /messages #}
 
         {# content #}
-            {% block content %}
-                <strong>Oops!</strong> Looks like there's nothing to see here.
-            {% endblock %}
+        {% block content %}
+            <strong>Oops!</strong> Looks like there's nothing to see here.
+        {% endblock %}
         {# /content #}
     </div>
-
-
 
 
     {# footer #}
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Seventeen Shirts.com &copy; 2015</p>
+            <p class="text-muted">SeventeenShirts.com &copy; 2015</p>
         </div>
     </footer>
     {# /footer #}
@@ -127,5 +124,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     {# /js #}
+
+    {% block scripts %}{% endblock %}
 </body>
 </html>

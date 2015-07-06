@@ -1,13 +1,11 @@
 {% extends "_shared/base.html" %}
 {% load add_css %}
+{% load staticfiles %}
 
 {% block content %}
-
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
     <div class="row">
         <div class="col-md-7">
-            <img src="http://placehold.it/500x600">
+            <img class="detail" src="{% static 'images/shirts/shirt6.jpg' %}">
         </div>
         <div class="col-md-5">
             <h1>{{ product.name }}</h1>
@@ -36,4 +34,19 @@
         </div>
     </div>
 
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+        $('img.detail')
+            .wrap('<span style="display:inline-block"></span>')
+            .css('display', 'block')
+            .parent()
+            .zoom();
+        });
+    </script>
 {% endblock %}

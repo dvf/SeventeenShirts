@@ -64,7 +64,7 @@ def user_logout(request):
 
 @login_required
 def user_history(request):
-    orders = Order.objects.all()
+    orders = Order.objects.filter(customer=request.user.pk)
 
     # Let's paginate
     paginator = Paginator(orders, 10)

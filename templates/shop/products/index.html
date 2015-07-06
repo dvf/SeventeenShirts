@@ -2,14 +2,12 @@
 
 {% block content %}
 
-    <h1>Products</h1>
+    <h1 class="page-header">Products</h1>
     <div class="row">
         {% for product in products %}
-            <div class="col-md-4">
-                <img src="http://placehold.it/400x350" style="width: 100%">
-                <h2><a href="{%  url 'shop:detail' product.id %}">{{ product.name }}</a></h2>
-                <p>{{ product.description }}</p>
-                <strong>{{ product.current_price }}</strong>
+            <div class="col-md-4 index-product">
+                <a href="{%  url 'shop:detail' product.id %}"><img src="{{ product.thumbnail_url }}" style="width: 100%"><a/>
+                <h3><a href="{%  url 'shop:detail' product.id %}">{{ product.name }}</a><span class="index-product-price pull-right">$ {{ product.current_price }}</span></h3>
             </div>
         {% endfor %}
     </div>

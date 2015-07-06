@@ -38,6 +38,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# We will host the images on a CDN for speed
+IMG_CDN = '/static/images/shirts'
 
 # Application definition
 
