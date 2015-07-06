@@ -6,7 +6,7 @@
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 index-product">
-                <a href="{%  url 'shop:detail' product.id %}"><img src="{{ product.thumbnail_url }}" style="width: 100%"><a/>
+                <a href="{%  url 'shop:detail' product.id %}"><img src="{{ product.get_thumbnail_url }}" style="width: 100%"><a/>
                 <h3><a href="{%  url 'shop:detail' product.id %}">{{ product.name }}</a><span class="index-product-price pull-right">$ {{ product.current_price }}</span></h3>
             </div>
         {% endfor %}

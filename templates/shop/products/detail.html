@@ -5,10 +5,12 @@
 {% block content %}
     <div class="row">
         <div class="col-md-7">
-            <img class="detail" src="{% static 'images/shirts/shirt6.jpg' %}">
+            <img class="detail" src="{{ product.get_image_url }}">
         </div>
         <div class="col-md-5">
             <h1>{{ product.name }}</h1>
+            <h3>$ {{ product.current_price }}</h3>
+            <br>
             <p>{{ product.description }}</p>
             <form action="" method="post">
                 {% csrf_token %}
@@ -29,7 +31,7 @@
                 </div>
 
 
-                <input type="submit" class="btn btn-success" value="Buy Shirts Now" />
+                <input type="submit" class="btn btn-success" value="Buy Shirt" />
             </form>
         </div>
     </div>

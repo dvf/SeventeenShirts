@@ -13,6 +13,8 @@ class Product(models.Model):
     thumbnail_filename = models.CharField(max_length=200, default="")
     image_filename = models.CharField(max_length=200, default="")
 
+    is_active = models.BooleanField(default=True)
+
     def __unicode__(self):
         return self.name
 
@@ -32,6 +34,9 @@ class Order(models.Model):
     )
 
     customer = models.ForeignKey(User)
+
+    # If you want to disable referential integrity when deleting products then add
+    # to FK: blank=True, null=True, on_delete=models.SET_NULL
     product = models.ForeignKey(Product)
 
     size = models.CharField(max_length=2, choices=SIZES)
