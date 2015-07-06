@@ -122,3 +122,13 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
+# Setting up Memcached on separate AWS instances
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': [
+#             '172.19.26.240:11211',
+#             '172.19.26.242:11211',
+#         ]
+#     }
+# }
